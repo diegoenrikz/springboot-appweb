@@ -1,14 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title th:text="${titulo}">Insert title here</title>
+<title>Lista Empleados</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular-route.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
-</head>
-<body>
+<script th:src="@{/app.js}"></script>
+<script th:src="@{/controller//listarctr.js}"></script>
+<head>
+<body ng-app="EmployeeManagement" ng-controller="EmployeeListarController">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Spring Boot</a>
@@ -21,49 +24,53 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Empleados</a>
+						aria-current="page" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="/listar">Empleados</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
+	
 	<div class="container">
 		<h1
 			class="text-success border border-sucess border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
-		<p><a th:href="@{/form}" class="btn btn-success btn-xs">Crear Empleado</a></p>
-		<table class="table table-striped" th:if="${!employees.isEmpty()}">
+		<p>
+			<a th:href="@{/}" class="btn btn-success btn-xs">Crear
+				Empleado</a>
+
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>Emp Id</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Cargo</th>
 					<th>Jefe</th>
 					<th>Salario</th>
-					<th>Fecha de Contratación</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
+					<th>Fecha de Ingreso</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
-
+			<!-- $scope.employees -->
 			<tbody>
-				<tr th:each="employee: ${employees}">
-					<td th:text="${employee.id}"></td>
-					<td th:text="${employee.nombre}"></td>
-					<td th:text="${employee.apellido}"></td>
-					<td th:text="${employee.cargo}"></td>
-					<td th:text="${employee.jefe}"></td>
-					<td th:text="${employee.salario}"></td>
-					<td th:text="${employee.fecha}"></td>
-					<td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${employee.id}"> Editar</a></td>
-					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${employee.id}" onclick="return confirm('¿Estás seguro de eliminar?')">Eliminar</a></td>
+				<tr ng-repeat="employee in employees">
+					<td>{{ employee.id }}</td>
+					<td>{{ employee.nombre }}</td>
+					<td>{{ employee.apellido }}</td>
+					<td>{{ employee.cargo }}</td>
+					<td>{{ employee.jefe }}</td>
+					<td>{{ employee.salario }}</td>
+					<td>{{ employee.fecha }}</td>
+					<td><a ng-click="editEmployee(employee)"
+						class="btn btn-primary btn-xs" >Edit</a></td>
+					<td><a ng-click="deleteEmployee(employee)"
+						class="btn btn-danger btn-xs">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
-
 	</div>
 
 	<script
@@ -79,5 +86,6 @@
 		rel="stylesheet"
 		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
 		crossorigin="anonymous">
+
 </body>
 </html>

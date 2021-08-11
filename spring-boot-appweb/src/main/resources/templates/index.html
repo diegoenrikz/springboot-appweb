@@ -1,15 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title th:text="${titulo}">Insert title here</title>
+<title>Lista Empleados</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular-route.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
-</head>
-<body>
-
+<script th:src="@{/app.js}"></script>
+<script th:src="@{/controller/indexctr.js}"></script>
+<head>
+<body ng-app="EmployeeManagement" ng-controller="EmployeeIndexController">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Spring Boot</a>
@@ -22,8 +24,8 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Empleados</a>
+						aria-current="page" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="/listar">Empleados</a>
 					</li>
 				</ul>
 			</div>
@@ -31,61 +33,62 @@
 	</nav>
 
 	<div class="container">
-
-		<h1 class="text-success" th:text="${titulo}"></h1>
-
-		<form th:action="@{/form}" th:object="${employee}" method="post">
+		<h1 class="text-success">Formulario Empleado</h1>
+		<form ng-submit="submitEmployee()">
 			<div class="form-group">
-
 				<label class="col-sm-2 clo-form-label">Nombre</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'formcontrol alert danger'" />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+					<input type="text" ng-model="employeeForm.nombre"
+						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Apellido</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{apellido}" class="form-control" th:errorclass="'formcontrol alert danger'" />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+					<input type="text" ng-model="employeeForm.apellido"
+						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Cargo</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{cargo}" class="form-control" th:errorclass="'form-control alert danger'"  />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}"></small>
+					<input type="text" ng-model="employeeForm.cargo"
+						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Jefe</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{jefe}" class="form-control" th:errorclass="'form-control alert danger'" />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('jefe')}" th:errors="*{jefe}"></small>
+					<input type="text" ng-model="employeeForm.jefe"
+						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Salario</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{salario}" class="form-control" th:errorclass="'form-control alert danger'" />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></small>
+					<input type="text" ng-model="employeeForm.salario"
+						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Fecha</label>
+				<label class="col-sm-2 clo-form-label">Fecha de Ingreso</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{fecha}" class="form-control" th:errorclass="'form-control alert danger'" />
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+					<input type="text" ng-model="employeeForm.fecha"
+						class="form-control" />
 				</div>
 			</div>
 
 			<div class="form-group ">
 				<div class="col-sm-6">
-					<input type="submit" value="Crear Empleado" class="btn btn-primary" />
+					<input type="submit" value="Guardar" class="btn btn-success btn-xs" />
 				</div>
 			</div>
-			<!-- input type="hidden" th:field="*{id}" /-->
 		</form>
+		</br>
+		<div class="form-group ">
+			<a class="btn btn-primary btn-xs" ng-click="clearEmployee()">Limpiar
+				Campos</a>
+		</div>
 
 	</div>
 
@@ -102,5 +105,6 @@
 		rel="stylesheet"
 		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
 		crossorigin="anonymous">
+
 </body>
 </html>
