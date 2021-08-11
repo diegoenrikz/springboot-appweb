@@ -20,8 +20,6 @@ public class EmployeeRestController {
 	@Autowired
 	private IEmployeeService employeeService;
 	
-	//@Autowired
-	//private ReportService reportService;
 
 	@GetMapping(value = "/employees")
 	public List<Employee> getEmployees() {
@@ -40,12 +38,6 @@ public class EmployeeRestController {
 		employeeService.save(employee);
 		
 	}
-	
-	/*@PutMapping(value = "/employee")
-	public void updateEmployee(@RequestBody Employee employee) {
-		employeeService.(employee);
-		
-	}*/
 
 	@DeleteMapping(value = "/employee/{id}")
 	public void deleteEmployee(@PathVariable(value = "id") Integer id) {
@@ -53,12 +45,6 @@ public class EmployeeRestController {
 			employeeService.delete(id);
 		}
 	}
-	
-	/*@GetMapping("/report/{format}")
-	public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
-		
-		 return reportService.exportReport(format);
-	}*/
 	
 
 }
