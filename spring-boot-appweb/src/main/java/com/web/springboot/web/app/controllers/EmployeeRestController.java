@@ -1,7 +1,6 @@
 package com.web.springboot.web.app.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +19,9 @@ public class EmployeeRestController {
 
 	@Autowired
 	private IEmployeeService employeeService;
+	
+	//@Autowired
+	//private ReportService reportService;
 
 	@GetMapping(value = "/employees")
 	public List<Employee> getEmployees() {
@@ -51,5 +53,12 @@ public class EmployeeRestController {
 			employeeService.delete(id);
 		}
 	}
+	
+	/*@GetMapping("/report/{format}")
+	public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
+		
+		 return reportService.exportReport(format);
+	}*/
+	
 
 }

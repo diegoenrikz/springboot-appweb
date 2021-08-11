@@ -61,7 +61,21 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
 		$scope.employeeForm.jefe = employee.jefe;
 		$scope.employeeForm.salario = employee.salario;
 		$scope.employeeForm.fecha = new Date(employee.fecha + ' 23:59:59');
-		//$scope.employeeForm.fecha = employee.fecha;
+		enabledAll();	
+		
+    };
+    
+    // In case of edit
+    $scope.editSalaryEmployee = function(employee) {
+        $scope.employeeForm.id = employee.id;
+        $scope.employeeForm.nombre = employee.nombre;
+        $scope.employeeForm.apellido = employee.apellido;
+		$scope.employeeForm.cargo = employee.cargo;
+		$scope.employeeForm.jefe = employee.jefe;
+		$scope.employeeForm.salario = employee.salario;
+		$scope.employeeForm.fecha = new Date(employee.fecha + ' 23:59:59');
+        enabledSalary();
+		
     };
  
     // Private Method  
@@ -98,10 +112,29 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
     function _clearFormData() {
         $scope.employeeForm.id = "";
         $scope.employeeForm.nombre = "";
-        $scope.employeeForm.apellido = "",
-		$scope.employeeForm.cargo = "",
-		$scope.employeeForm.jefe = "",
-		$scope.employeeForm.salario = "",
-		$scope.employeeForm.fecha = ""
+        $scope.employeeForm.apellido = "";
+		$scope.employeeForm.cargo = "";
+		$scope.employeeForm.jefe = "";
+		$scope.employeeForm.salario = "";
+		$scope.employeeForm.fecha = "";
+        enabledAll();
     };
+    
+     function enabledAll() {
+		angular.element(document.getElementById('nombre'))[0].disabled = false;
+		angular.element(document.getElementById('apellido'))[0].disabled = false;
+		angular.element(document.getElementById('cargo'))[0].disabled = false;
+		angular.element(document.getElementById('jefe'))[0].disabled = false;
+		angular.element(document.getElementById('salario'))[0].disabled = false;
+		angular.element(document.getElementById('fecha'))[0].disabled = false;
+      };
+      
+      function enabledSalary() {
+		angular.element(document.getElementById('nombre'))[0].disabled = true;
+		angular.element(document.getElementById('apellido'))[0].disabled = true;
+		angular.element(document.getElementById('cargo'))[0].disabled = true;
+		angular.element(document.getElementById('jefe'))[0].disabled = true;
+		angular.element(document.getElementById('salario'))[0].disabled = false;
+		angular.element(document.getElementById('fecha'))[0].disabled = true;	
+      };
 });

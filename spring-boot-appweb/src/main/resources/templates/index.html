@@ -2,17 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Lista Empleados</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
-    <script src="https://code.angularjs.org/1.8.0/angular-route.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.js"></script>
+<script src="https://code.angularjs.org/1.8.0/angular-route.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
- <!-- link th:href="@{/css/main.css}" rel="stylesheet" / -->
+<!-- link th:href="@{/css/main.css}" rel="stylesheet" / -->
 <script th:src="@{/app.js}"></script>
 <script th:src="@{/controller/indexcontroller.js}"></script>
 <head>
-<body ng-app="EmployeeManagement" ng-controller="EmployeeIndexController">
+<body ng-app="EmployeeManagement"
+	ng-controller="EmployeeIndexController">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Spring Boot</a>
@@ -35,96 +37,119 @@
 
 	<div class="container">
 		<h1 class="text-success">Formulario Empleado</h1>
-		<form ng-submit="submitEmployee()">
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Nombre</label>
-				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.nombre"
-						class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Apellido</label>
-				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.apellido"
-						class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Cargo</label>
-				<div class="col-sm-6">
-					<select ng-model="employeeForm.cargo" ng-options="opt as opt for opt in jobs"
-					  class="form-select" ></select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Jefe</label>
-				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.jefe"
-						class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Salario</label>
-				<div class="col-sm-6">
-					<input type="number" ng-model="employeeForm.salario"
-						class="form-control" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 clo-form-label">Fecha de Ingreso</label>
-				<div class="col-sm-6">
-					<input type="date" ng-model="employeeForm.fecha"
-						class="form-control" />
-				</div>
-			</div>
+		<div class="col-sm-6"></div>
+		<div class="col-sm-6"></div>
 
-			<div class="form-group ">
-				<div class="col-sm-3">
-					<input type="submit" value="Guardar" class="btn btn-success btn-xs" />
-					<a class="btn btn-primary btn-xs" ng-click="clearEmployee()">Limpiar
-				Campos</a>
-				</div>
-	
-			</div>
-		</form>
-		</br>
 
 	</div>
-	
-		<div class="container">
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Emp Id</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Cargo</th>
-					<th>Jefe</th>
-					<th>Salario</th>
-					<th>Fecha de Ingreso</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<!-- $scope.employees -->
-			<tbody>
-				<tr ng-repeat="employee in employees">
-					<td>{{ employee.id }}</td>
-					<td>{{ employee.nombre }}</td>
-					<td>{{ employee.apellido }}</td>
-					<td>{{ employee.cargo }}</td>
-					<td>{{ employee.jefe }}</td>
-					<td>{{ employee.salario }}</td>
-					<td>{{ employee.fecha }}</td>
-					<td><a ng-click="editEmployee(employee)"
-						class="btn btn-primary btn-xs" >Edit</a></td>
-					<td><a ng-click="deleteEmployee(employee)"
-						class="btn btn-danger btn-xs">Delete</a></td>
-				</tr>
-			</tbody>
-		</table>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-6">
+						<form ng-submit="submitEmployee()">
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Nombre</label>
+								<div class="col-sm-12">
+									<input id="nombre" type="text" ng-model="employeeForm.nombre"
+										class="form-control" ng-disabled="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Apellido</label>
+								<div class="col-sm-12">
+									<input id="apellido" type="text"
+										ng-model="employeeForm.apellido" class="form-control"
+										ng-disabled="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Cargo</label>
+								<div class="col-sm-12">
+									<select id="cargo" ng-model="employeeForm.cargo"
+										ng-options="opt as opt for opt in jobs" class="form-select"
+										ng-disabled="false"></select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Jefe</label>
+								<div class="col-sm-12">
+									<input id="jefe" type="text" ng-model="employeeForm.jefe"
+										class="form-control" ng-disabled="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Salario</label>
+								<div class="col-sm-12">
+									<input id="salario" type="number"
+										ng-model="employeeForm.salario" class="form-control"
+										ng-disabled="false" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 clo-form-label">Fecha de Ingreso</label>
+								<div class="col-sm-12">
+									<input id="fecha" type="date" ng-model="employeeForm.fecha"
+										class="form-control" ng-disabled="false" />
+								</div>
+							</div>
+
+							<div class="form-group ">
+								<div class="col-sm-6">
+									<input type="submit" value="Guardar"
+										class="btn btn-success btn-xs" /> <a
+										class="btn btn-primary btn-xs" ng-click="clearEmployee()">Limpiar
+										Campos</a>
+								</div>
+
+							</div>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Emp Id</th>
+									<th>Nombre</th>
+									<th>Apellido</th>
+									<th>Cargo</th>
+									<th>Jefe</th>
+									<th>Salario</th>
+									<th>Fecha de Ingreso</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<!-- $scope.employees -->
+							<tbody>
+								<tr ng-repeat="employee in employees">
+									<td>{{ employee.id }}</td>
+									<td>{{ employee.nombre }}</td>
+									<td>{{ employee.apellido }}</td>
+									<td>{{ employee.cargo }}</td>
+									<td>{{ employee.jefe }}</td>
+									<td>{{ employee.salario }}</td>
+									<td>{{ employee.fecha }}</td>
+									<td><a ng-click="editEmployee(employee)"
+										class="btn btn-primary btn-xs fa fa-pencil-square-o"></a></td>
+									<td><a ng-click="deleteEmployee(employee)"
+										class="btn btn-danger btn-xs fa fa-times"></a></td>
+									<td><a ng-click="editSalaryEmployee(employee)"
+										class="btn btn-success btn-xs fa fa-money"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+
+						</tr>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script
@@ -140,6 +165,9 @@
 		rel="stylesheet"
 		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
 		crossorigin="anonymous">
+
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </body>
 </html>
