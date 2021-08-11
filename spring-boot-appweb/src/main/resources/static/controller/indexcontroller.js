@@ -1,7 +1,7 @@
 'use strict';
 
 // Controller Part
-app.controller("EmployeeListarController", function($scope, $http, $window) {
+app.controller("EmployeeIndexController", function($scope, $http, $window) {
  
  
     $scope.employees = [];
@@ -14,6 +14,8 @@ app.controller("EmployeeListarController", function($scope, $http, $window) {
 		salario: "",
 		fecha: ""
     };
+	
+	$scope.jobs = ['Desarrollador','Supervisor','Tester'];
  
     // Now load the data from server
     _refreshEmployeeData();
@@ -26,13 +28,6 @@ app.controller("EmployeeListarController", function($scope, $http, $window) {
         var url = "";
           method = "POST";
           url = '/employee';
-        /*if ($scope.employeeForm.id == "") {
-            method = "POST";
-            url = '/employee';
-        } else {
-            method = "PUT";
-            url = '/employee';
-        }*/
  
         $http({
             method: method,
@@ -65,9 +60,8 @@ app.controller("EmployeeListarController", function($scope, $http, $window) {
 		$scope.employeeForm.cargo = employee.cargo;
 		$scope.employeeForm.jefe = employee.jefe;
 		$scope.employeeForm.salario = employee.salario;
-		$scope.employeeForm.fecha = employee.fecha;
-		$scope.$parent.mivariable = employee.fecha;
-		$window.location.href = '/'
+		$scope.employeeForm.fecha = new Date(employee.fecha + ' 23:59:59');
+		//$scope.employeeForm.fecha = employee.fecha;
     };
  
     // Private Method  

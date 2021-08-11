@@ -8,8 +8,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
 	crossorigin="anonymous"></script>
+ <!-- link th:href="@{/css/main.css}" rel="stylesheet" / -->
 <script th:src="@{/app.js}"></script>
-<script th:src="@{/controller/indexctr.js}"></script>
+<script th:src="@{/controller/indexcontroller.js}"></script>
 <head>
 <body ng-app="EmployeeManagement" ng-controller="EmployeeIndexController">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -52,8 +53,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Cargo</label>
 				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.cargo"
-						class="form-control" />
+					<select ng-model="employeeForm.cargo" ng-options="opt as opt for opt in jobs"
+					  class="form-select" ></select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -66,30 +67,64 @@
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Salario</label>
 				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.salario"
+					<input type="number" ng-model="employeeForm.salario"
 						class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 clo-form-label">Fecha de Ingreso</label>
 				<div class="col-sm-6">
-					<input type="text" ng-model="employeeForm.fecha"
+					<input type="date" ng-model="employeeForm.fecha"
 						class="form-control" />
 				</div>
 			</div>
 
 			<div class="form-group ">
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<input type="submit" value="Guardar" class="btn btn-success btn-xs" />
+					<a class="btn btn-primary btn-xs" ng-click="clearEmployee()">Limpiar
+				Campos</a>
 				</div>
+	
 			</div>
 		</form>
 		</br>
-		<div class="form-group ">
-			<a class="btn btn-primary btn-xs" ng-click="clearEmployee()">Limpiar
-				Campos</a>
-		</div>
 
+	</div>
+	
+		<div class="container">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Emp Id</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Cargo</th>
+					<th>Jefe</th>
+					<th>Salario</th>
+					<th>Fecha de Ingreso</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<!-- $scope.employees -->
+			<tbody>
+				<tr ng-repeat="employee in employees">
+					<td>{{ employee.id }}</td>
+					<td>{{ employee.nombre }}</td>
+					<td>{{ employee.apellido }}</td>
+					<td>{{ employee.cargo }}</td>
+					<td>{{ employee.jefe }}</td>
+					<td>{{ employee.salario }}</td>
+					<td>{{ employee.fecha }}</td>
+					<td><a ng-click="editEmployee(employee)"
+						class="btn btn-primary btn-xs" >Edit</a></td>
+					<td><a ng-click="deleteEmployee(employee)"
+						class="btn btn-danger btn-xs">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<script

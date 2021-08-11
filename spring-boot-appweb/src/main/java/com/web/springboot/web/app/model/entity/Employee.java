@@ -59,7 +59,7 @@ public class Employee implements Serializable{
 	@NotNull
 	@Column(name="fecha_reg")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private Date fecha;
 	
 
