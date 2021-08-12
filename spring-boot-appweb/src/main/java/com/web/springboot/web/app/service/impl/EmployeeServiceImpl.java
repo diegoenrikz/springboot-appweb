@@ -42,4 +42,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	}
 
+	@Override
+	public List<Employee> findEmployeebyJefe() {
+		return employeeDao.findEmployeebyJefe();
+		
+	}
+
 }

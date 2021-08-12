@@ -35,7 +35,7 @@ public class ReportController {
 		response.setContentType("text/html");
 		
 		JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(
-				iEmployeeService.findAll());
+				iEmployeeService.findEmployeebyJefe());
 		
 		JasperReport compileReport = JasperCompileManager
 				.compileReport(new FileInputStream("D://Web//workspace-spring-tool//spring-boot-appweb//src//main//resources//employee.jrxml"));

@@ -15,7 +15,7 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
 		fecha: ""
     };
 	
-	$scope.jobs = ['Desarrollador','Supervisor','Tester'];
+	$scope.jobs = ['Jefe','Supervisor','Desarrollador','Tester'];
  
     // Now load the data from server
     _refreshEmployeeData();

@@ -48,7 +48,6 @@ public class Employee implements Serializable{
 	@Column(name="cargo")
 	private String cargo;
 	
-	@NotNull
 	@Column(name="jefe")
 	private Integer jefe;
 	
@@ -61,6 +60,18 @@ public class Employee implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private Date fecha;
+
+	public Employee(Integer id, String nombreJ, String apellidoJ, String nombreE, String apellidoE,
+			String cargo, @NotNull Double salario) {
+		super();
+		this.id = id;
+		this.nombre = nombreJ + " " + apellidoJ;
+		this.apellido = nombreE + " " + apellidoE;
+		this.cargo = cargo;
+		this.salario = salario;
+	}
+	
+	
 	
 
 }

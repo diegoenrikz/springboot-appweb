@@ -13,5 +13,7 @@ public interface IEmployeeService {
 	public Employee findOne(Integer id);
 	
 	public void delete(Integer id);
+	
+	public List<Employee> findEmployeebyJefe();
 
 }
