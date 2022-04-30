@@ -18,7 +18,7 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
 	$scope.jobs = ['Jefe','Supervisor','Desarrollador','Tester'];
  
     // Now load the data from server
-    _refreshEmployeeData();
+    refreshEmployeeData();
  
     // HTTP POST/PUT methods for add/edit employee  
     // Call: http://localhost:8080/employee
@@ -28,7 +28,9 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
         var url = "";
           method = "POST";
           url = '/employee';
- 
+          if($scope.employeeForm.jefe != ""){
+               $scope.employeeForm.jefe = $scope.employees.find(element => element.nombre==$scope.employeeForm.jefe).id;
+          }
         $http({
             method: method,
             url: url,
@@ -40,7 +42,7 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
     };
  
     $scope.clearEmployee = function() {
-        _clearFormData();
+        clearFormData();
     }
  
     // HTTP DELETE- delete employee by Id
@@ -58,22 +60,32 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
         $scope.employeeForm.nombre = employee.nombre;
         $scope.employeeForm.apellido = employee.apellido;
 		$scope.employeeForm.cargo = employee.cargo;
-		$scope.employeeForm.jefe = employee.jefe;
 		$scope.employeeForm.salario = employee.salario;
 		$scope.employeeForm.fecha = new Date(employee.fecha + ' 23:59:59');
+		if(employee.jefe!=null){
+			$scope.employeeForm.jefe = $scope.employees.find(element => element.id==employee.jefe).nombre;
+		}else{
+			$scope.employeeForm.jefe = "";
+		}
+		
 		enabledAll();	
 		
     };
     
-    // In case of edit
+    // In case of edit Salary
     $scope.editSalaryEmployee = function(employee) {
         $scope.employeeForm.id = employee.id;
         $scope.employeeForm.nombre = employee.nombre;
         $scope.employeeForm.apellido = employee.apellido;
 		$scope.employeeForm.cargo = employee.cargo;
-		$scope.employeeForm.jefe = employee.jefe;
 		$scope.employeeForm.salario = employee.salario;
 		$scope.employeeForm.fecha = new Date(employee.fecha + ' 23:59:59');
+		if(employee.jefe!=null){
+			$scope.employeeForm.jefe = $scope.employees.find(element => element.id==employee.jefe).nombre;
+		}else{
+			$scope.employeeForm.jefe = "";
+		}
+		
         enabledSalary();
 		
     };
@@ -81,13 +93,19 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
     // Private Method  
     // HTTP GET- get all employees collection
     // Call: http://localhost:8080/employees
-    function _refreshEmployeeData() {
+    function refreshEmployeeData() {
         $http({
             method: 'GET',
             url: '/employees'
         }).then(
             function(res) { // success
                 $scope.employees = res.data;
+                $scope.cargos = []
+                $scope.employees.forEach(element => 
+                $scope.cargos.push(element.nombre)
+                );
+                
+                console.log($scope.cargos);
             },
             function(res) { // error
                 console.log("Error: " + res.status + " : " + res.data);
@@ -96,8 +114,8 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
     }
  
     function _success(res) {
-        _refreshEmployeeData();
-        _clearFormData();
+        refreshEmployeeData();
+        clearFormData();
     }
  
     function _error(res) {
@@ -109,7 +127,7 @@ app.controller("EmployeeIndexController", function($scope, $http, $window) {
     }
  
     // Clear the form
-    function _clearFormData() {
+    function clearFormData() {
         $scope.employeeForm.id = "";
         $scope.employeeForm.nombre = "";
         $scope.employeeForm.apellido = "";

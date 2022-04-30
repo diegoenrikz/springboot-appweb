@@ -73,8 +73,11 @@
 							<div class="form-group">
 								<label class="col-sm-2 clo-form-label">Jefe</label>
 								<div class="col-sm-12">
-									<input id="jefe" type="text" ng-model="employeeForm.jefe"
-										class="form-control" ng-disabled="false" />
+								<select id="jefe" ng-model="employeeForm.jefe"
+										ng-options="opt as opt for opt in cargos" class="form-select"
+										ng-disabled="false"></select>
+									<!--  input id="jefe" type="number" ng-model="employeeForm.jefe"
+										class="form-control" ng-disabled="false" /-->
 								</div>
 							</div>
 							<div class="form-group">
